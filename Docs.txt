@@ -1,0 +1,116 @@
+Documentation is online, follow the link below to view it
+Link: https://carter.games/leaderboardmanager
+
+
+Offline Documentation Copy:
+
+
+Summary
+Contributors: Jonathan Carter
+Documentation Valid for Version: 1.0.4
+Last Updated: 05/02/2021
+
+
+Contents
+1 – Package Information
+2 – Using The Asset
+    2.1 – Initial Setup
+2.2 – The Display Script
+3 – Methods
+    3.1 – Leaderboard Manager Methods
+    3.2 – Leaderboard Display Methods
+4 – Error Messages & Common Problems
+
+
+1) Package Information
+The package has 5 main folders & 11 files:
+
+
+Editor/Carter Games/Leaderboard Manager: LeaderboardDisplayEditor.cs
+Prefabs/Carter Games/Leaderboard Manager/Example: Canvas.prefab, LeaderboardRow.prefab
+Resourses/Carter Games/Leaderboard Manager: IconLBM.png
+Scenes/Carter Games/Leaderboard Manager/Example: LeaderboardManagerExampleScene.scene
+Scripts/Carter Games/Leaderboard Manager: LeaderboardManager.cs, LeaderboardData.cs & LeaderboardDisplay.cs
+Scripts/Carter Games/Leaderboard Manager/Example LeaderboardManagerExample.cs
+ChangeLog: Shows the changes from previous verisons of the asset.
+Readme: Text file that goes over the changelog for the asset.
+Docs: Text file that links to here and provides an offline copy of this page.
+
+
+2) Using The Asset
+Initial Setup
+If the asset is all imported correctly, you should be good to go without any additional setup. We recommend you import the editor and prefabs as they help with the usability of the asset. 
+The prefabs provided give you an idea of how to implement you own UI and are only their as an example. It’s a good idea to have your leaderboard on a scroll view so all the entries can be 
+displayed when loaded, but that is up to you. If you are new to unity or unsure how the asset works, try out the example scene provided with the asset, assuming you imported everything into 
+your project.
+
+
+The Display Script
+
+The asset comes with a display script which gives an example of how the leaderboard manager can be used in your game. The provided script has an editor script to make it look a little 
+neater as well as providing links to this documentation and the discord server. The display object needs to be set to the parent object you wish to add rows to. This should be a UI sorted 
+group so that added a prefab instance will be visible to the user. The row prefab is the prefab spawned in for each leaderboard entry for your game. You can use the one provided or make 
+your own, as long as it has the right amount of text componenets in the right order it will work with the display script provided. If you need additional elements you will need to modify 
+the script to accomidate the changes. The config section is optional but allows you to determine how many entries you want to display. This is useful if you only want to show to top 3 or 
+top 10 entries for your game. Ticking the box will display a int field for you to enter this into.
+
+The last option controls how the leaderboard is ordered when it is called. You can choose to have it:
+Unordered – which displays each entire sin the order they were placed into the leaderboard.
+Descending – which displays the entries in highest score first.
+Ascending – which does the opposite and shows the entries with the lowest score first.
+
+
+3) Methods
+
+Leaderboard Manager Methods
+All methods in this class are static and can be called from anywhere in your games without a reference to the script.
+
+AddToLeaderboard(string name, float score)
+Adds the name and score to the leaderboard via a leaderboarddata instance. 
+
+RemoveEntryFromLeaderboard(string playerName, float playerScore) 
+Removes the entered entry from the leaderboard.
+
+SaveLeaderboardStore(LeaderboardStore _storedData)
+Saves the leaderboard, requires a LeaderboardStore which is holds an array of LeaderboardData. A LeaderboardStore can be added to by calling LeaderboardStore.leaderboardData.add(leaderboardData); 
+
+LoadLeaderboardStore()
+Loads the saved LeaderboardStore from the save file used for the leaderboard.
+Returns: LeaderboardStore
+
+LoadLeaderboardData()
+Loads the saved LeaderboardData from the save file used for the leaderboard, overload to return an array of leaderboard data instead.
+Returns: Array of LeaderboardData
+
+LoadLeaderboardDataDescending()
+Loads the leaderboard values in a descending order based on the players scores.
+Returns: Array of LeaderboardData sorted in highest score first.
+
+LoadLeaderboardDataAscending()
+Loads the leaderboard values in a ascending order based on the players scores.
+Returns: Array of LeaderboardData sorted in lowest score first.
+
+ClearLeaderboardData()
+Erases the leaderboard data at the file level, this action can’t be reversed!
+
+GetPosition(string playerName, int playerScore, LeaderboardDisplay.DisplayOptions option)
+Gets the position of a player based on their name and score values in the order you define.
+Returns: Int for the position for the inputted values
+
+
+
+Leaderboard Display Methods
+Methods in this class require a reference to be called from other scripts.
+
+UpdateLeaderboardDisplay()
+Updates the leaderboard display with any new entries.
+
+ClearLeaderboard() 
+Clears the leaderboard display of all entries but keeps the data in the local file.
+
+
+
+4) Error Messages & Common Problems
+If you run into a problem or get an error and are unsure, feel free to drop me an email at (hello@carter.games) and I’ll do my best to help you out.
+
+We don’t have any specific problems that we can forsee, if any become a common question we will be sure to add it here.
