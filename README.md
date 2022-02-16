@@ -1,7 +1,7 @@
 ![1200 x 630](https://user-images.githubusercontent.com/33253710/154334690-a848e1a9-c4d2-4ed7-9aab-a1f19587094c.jpg)
 
 <b>Leaderboard Manager</b> is a <b>FREE</b> local leaderboard system for Unity games. 
-> Version 1.1.0
+> Version 2.0.0
 
 ## Key Features
 - Easily create & update leaderboards with a name & score.
