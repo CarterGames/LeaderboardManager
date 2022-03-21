@@ -62,7 +62,7 @@ namespace CarterGames.Assets.LeaderboardManager
             if (Data.Leaderboards.Count <= 0)
                 return;
 
-            if (Data.Leaderboards.Any(t => !t.BoardID.Equals(boardID)))
+            if (Data.Leaderboards.All(t => !t.BoardID.Equals(boardID)))
             {
                 Debug.LogError($"<color=D6BA64><b>Leaderboard Manager</b> | Unable to delete leaderboard with the ID {boardID} as there are no board with this ID saved.</color>");
                 return;
@@ -81,7 +81,7 @@ namespace CarterGames.Assets.LeaderboardManager
         {
             Load();
             
-            if (Data.Leaderboards.Any(t => !t.BoardID.Equals(boardID)))
+            if (Data.Leaderboards.All(t => !t.BoardID.Equals(boardID)))
             {
                 Debug.LogError($"<color=D6BA64><b>Leaderboard Manager</b>Leaderboard Manager | Unable to clear leaderboard with the ID {boardID} as there are no board with this ID saved.</color>");
                 return;
@@ -185,15 +185,7 @@ namespace CarterGames.Assets.LeaderboardManager
         {
             Load();
             
-            if (Data.Leaderboards.Count.Equals(0))
-            {
-                CreateLeaderboard(boardID);
-                GetLeaderboard(boardID).AddEntry(entry);
-                Save();
-                return;
-            }
-            
-            if (GetLeaderboard(boardID) == null)
+            if (!BoardExists(boardID))
             {
                 CreateLeaderboard(boardID);
                 GetLeaderboard(boardID).AddEntry(entry);
@@ -217,15 +209,7 @@ namespace CarterGames.Assets.LeaderboardManager
         {
             Load();
 
-            if (GetLeaderboard(boardID) == null)
-            {
-                CreateLeaderboard(boardID);
-                GetLeaderboard(boardID).AddEntry(new LeaderboardEntry(name, score));
-                Save();
-                return;
-            }
-            
-            if (Data.Leaderboards.Count.Equals(0))
+            if (!BoardExists(boardID))
             {
                 CreateLeaderboard(boardID);
                 GetLeaderboard(boardID).AddEntry(new LeaderboardEntry(name, score));
@@ -247,10 +231,7 @@ namespace CarterGames.Assets.LeaderboardManager
         {
             Load();
 
-            if (GetLeaderboard(boardID) == null)
-                return;
-
-            if (Data.Leaderboards.Count.Equals(0))
+            if (!BoardExists(boardID))
                 return;
             
             Data.Leaderboards.FirstOrDefault(t => t.BoardID.Equals(boardID))?.DeleteEntry(entry);
@@ -268,12 +249,9 @@ namespace CarterGames.Assets.LeaderboardManager
         {
             Load();
 
-            if (GetLeaderboard(boardID) == null)
+            if (!BoardExists(boardID))
                 return;
 
-            if (Data.Leaderboards.Count.Equals(0))
-                return;
-            
             Data.Leaderboards.FirstOrDefault(t => t.BoardID.Equals(boardID))?.DeleteEntry(name, score);
             Save();
         }
