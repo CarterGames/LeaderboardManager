@@ -98,7 +98,7 @@ namespace CarterGames.Assets.LeaderboardManager.Editor
 
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            EditorGUILayout.LabelField("Version: 2.0.0", GUILayout.Width(87.5f));
+            EditorGUILayout.LabelField("Version: 2.0.1", GUILayout.Width(87.5f));
             GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
 

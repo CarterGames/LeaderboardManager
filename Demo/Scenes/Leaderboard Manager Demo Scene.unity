@@ -1722,9 +1722,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b5ce28633c4a76a3d80aadb4da4608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boardID: {fileID: 1788389196}
-  playerName: {fileID: 1812286118}
-  playerScore: {fileID: 614018320}
+  boardID: {fileID: 1511537943}
+  playerName: {fileID: 505065358}
+  playerScore: {fileID: 251582821}
 --- !u!4 &825885281
 Transform:
   m_ObjectHideFlags: 0
@@ -1842,7 +1842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardID: Example
-  displayOption: 6
+  displayOption: 5
   boardParent: {fileID: 1833917230}
   rowPrefab: {fileID: 2228518243412644763, guid: f39d1e8b6224cde4d906c3065b2d4be6,
     type: 3}
@@ -2070,7 +2070,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 963635091}
-  - component: {fileID: 963635092}
   m_Layer: 0
   m_Name: ===================
   m_TagString: Untagged
@@ -2092,18 +2091,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &963635092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963635090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb8b644dd14f42998cafb9846d657911, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &971219820
 GameObject:
   m_ObjectHideFlags: 0
@@ -2474,6 +2461,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 904782688}
+        m_MethodName: UpdateDisplay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1135611353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2694,6 +2692,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 825885280}
         m_MethodName: RemoveFromBoard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 904782688}
+        m_MethodName: UpdateDisplay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3035,7 +3044,7 @@ GameObject:
   - component: {fileID: 1511537943}
   - component: {fileID: 1511537946}
   m_Layer: 5
-  m_Name: InputField (Name)
+  m_Name: InputField (BoardID)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -60,5 +60,15 @@ namespace CarterGames.Assets.LeaderboardManager
             this.name = name;
             this.score = score;
         }
+
+
+        /// <summary>
+        /// Converts the score to a time value in seconds. 
+        /// </summary>
+        /// <returns>The timespan in seconds</returns>
+        public TimeSpan ConvertScoreToTime()
+        {
+            return TimeSpan.FromSeconds(score);
+        }
     }
 }
