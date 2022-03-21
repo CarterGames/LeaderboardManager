@@ -18,8 +18,7 @@ namespace CarterGames.Assets.LeaderboardManager
         [SerializeField] [Tooltip("The row prefab (UI) to spawn that shows the leaderboard entries.")] protected GameObject rowPrefab;
 
         [SerializeField] [Tooltip("The number of entries to show on the display.")] protected int entriesToShow;
-     
-        
+
         // Custom Options...
         [SerializeField] [HideInInspector] private bool showOptions;
 
@@ -31,8 +30,8 @@ namespace CarterGames.Assets.LeaderboardManager
         [SerializeField] [Tooltip("The index in the row prefab that the name field should display in.")] protected int nameIndex = 1;
         [SerializeField] [Tooltip("The index in the row prefab that the score field should display in.")] protected int scoreIndex = 2;
 
-        [SerializeField] private bool formatScoreAsTime;
-        [SerializeField] private DisplayTimeFormat timeFormat;
+        [SerializeField] [Tooltip("Should the score be displayed in a time format?")] protected bool formatScoreAsTime;
+        [SerializeField] [Tooltip("The formatting type for the score value as time.")] protected DisplayTimeFormat timeFormat;
         
         
         protected LeaderboardData data;
@@ -71,12 +70,18 @@ namespace CarterGames.Assets.LeaderboardManager
         /// </summary>
         public void UpdateDisplay()
         {
+            if (startAt < 0)
+            {
+                Debug.LogError("<color=D6BA64><b>Leaderboard Manager</b> | Start at index must be greater than or equal to 0.</color>");
+                return;
+            }
+            
             data = LeaderboardManager.GetLeaderboard(boardID);
 
             switch (DisplayOption)
             {
                 case DisplayOption.Unassigned:
-                    Debug.LogWarning("Leaderboard Manager | Display option cannot be Unassigned.");
+                    Debug.LogWarning("<color=D6BA64><b>Leaderboard Manager</b> | Display option cannot be Unassigned.</color>");
                     break;
                 case DisplayOption.Top3Ascending:
                 case DisplayOption.Top3Descending:
@@ -100,6 +105,10 @@ namespace CarterGames.Assets.LeaderboardManager
         }
         
 
+        /// <summary>
+        /// Spawns the rows based on the display option selected.
+        /// </summary>
+        /// <param name="numberToShow">The number to show on the display.</param>
         private void SpawnRows(int numberToShow)
         {
             if (cachedRows == null)
@@ -141,11 +150,21 @@ namespace CarterGames.Assets.LeaderboardManager
         }
         
 
+        /// <summary>
+        /// Updates the visuals with the data in the board.
+        /// </summary>
+        /// <param name="_data">The data to read</param>
+        /// <param name="numberToShow">The number to show</param>
         protected virtual void UpdateDataOnRows(LeaderboardEntry[] _data, int numberToShow)
         {
             var _rowCount = boardParent.transform.childCount;
+
+            foreach (var row in cachedRows)
+                row.SetActive(false);
             
-            for (var i = startAt; i < numberToShow; i++)
+            cachedRows.Clear();
+
+            for (var i = startAt; i < numberToShow + startAt; i++)
             {
                 if (_data.Length + startAt <= i) return;
 
@@ -155,12 +174,14 @@ namespace CarterGames.Assets.LeaderboardManager
                 if (i + startAt >= _rowCount + startAt)
                 {
                     _obj = Instantiate(rowPrefab, boardParent);
+                    _obj.name = "Leaderboard Display Row";
                     cachedRows.Add(_obj);
                     _text = _obj.GetComponentsInChildren<Text>(true);
                 }
                 else
                 {
                     _obj = boardParent.transform.GetChild(i).gameObject;
+                    _obj.name = "Leaderboard Display Row";
                     cachedRows.Add(_obj);
                     _text = _obj.GetComponentsInChildren<Text>(true);
                 }
@@ -178,7 +199,12 @@ namespace CarterGames.Assets.LeaderboardManager
         }
         
         
-        private string GetScoreTimeFormatted(double score)
+        /// <summary>
+        /// Formats the score value as if it were time...
+        /// </summary>
+        /// <param name="score">The score to read</param>
+        /// <returns>The formatted string.</returns>
+        protected string GetScoreTimeFormatted(double score)
         {
             switch (timeFormat)
             {
