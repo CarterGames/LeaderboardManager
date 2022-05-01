@@ -1,4 +1,5 @@
-![1200 x 630](https://user-images.githubusercontent.com/33253710/154334690-a848e1a9-c4d2-4ed7-9aab-a1f19587094c.jpg)
+![2022 1 - LBM banner - 1200x630](https://user-images.githubusercontent.com/33253710/166158641-162dea0e-5614-47c0-8c77-b8988d8e12e6.jpg)
+
 
 <b>Leaderboard Manager</b> is a <b>FREE</b> local leaderboard system for Unity games. 
 > Version 2.0.1
