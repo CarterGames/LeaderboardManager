@@ -2,7 +2,12 @@
 
 
 <b>Leaderboard Manager</b> is a <b>FREE</b> local leaderboard system for Unity games. 
-> Version 2.0.1
+
+## Badges
+![CodeFactor](https://www.codefactor.io/repository/github/cartergames/LeaderboardManager/badge?style=for-the-badge)
+![GitHub all releases](https://img.shields.io/github/downloads/CarterGames/LeaderboardManager/total?style=for-the-badge)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/CarterGames/LeaderboardManager?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/CarterGames/LeaderboardManager?style=for-the-badge)
 
 ## Key Features
 - Easily create & update leaderboards with a name & score.
