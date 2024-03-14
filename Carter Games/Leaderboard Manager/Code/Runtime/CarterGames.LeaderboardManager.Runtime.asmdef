@@ -1,0 +1,17 @@
+{
+    "name": "CarterGames.Assets.LeaderboardManager.Runtime",
+    "rootNamespace": "CarterGames.Assets.LeaderboardManager",
+    "references": [
+        "GUID:62dfd0b4474fffe4f9730a5e7fe2e6b5",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
