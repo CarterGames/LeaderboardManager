@@ -29,7 +29,7 @@ You can port legacy data in editor and setup the porting. In older versions user
 ## Basic API Usage
 
 ### Create a leaderboard called "MyBoard"
-> LeaderboardManager.CreateLeaderboard("MyBoard");
+> LeaderboardManager.CreateLeaderboard("MyBoard", LeaderboardType.Score);
 
 ### Get leaderboard data for the board called "MyBoard"
 > var data = LeaderboardManager.GetLeaderboard("MyBoard");
