@@ -99,7 +99,7 @@ namespace CarterGames.Assets.LeaderboardManager
 
             if (HasScore)
             {
-                switch (entry.EntryType.FullName)
+                switch (entry.EntryType.Name)
                 {
                     case nameof(LeaderboardEntryTime):
                         scoreLabel.text = ((LeaderboardEntryTime) entry).ValueFormatted(customisations.TimeFormat);
@@ -108,7 +108,6 @@ namespace CarterGames.Assets.LeaderboardManager
                         scoreLabel.text = entry.EntryValue.ToString();
                         break;
                 }
-         
             }
             
             gameObject.SetActive(true);

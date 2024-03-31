@@ -23,6 +23,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using CarterGames.Assets.LeaderboardManager.Serialization;
 using UnityEditor;
 using UnityEngine;
 
@@ -125,7 +126,16 @@ namespace CarterGames.Assets.LeaderboardManager.Editor
                         EditorGUILayout.BeginHorizontal();
                         EditorGUILayout.TextField(boards[i].BoardData[j].EntryUuid);
                         EditorGUILayout.TextField(boards[i].BoardData[j].EntryName);
-                        EditorGUILayout.TextField(boards[i].BoardData[j].EntryValue.ToString());
+                        
+                        if (boards[i].Type.Equals(LeaderboardType.Time))
+                        {
+                            EditorGUILayout.TextField(((SerializableTime) boards[i].BoardData[j].EntryValue).ToString("dd:hh:mm:ss.fff"));
+                        }
+                        else
+                        {
+                            EditorGUILayout.TextField(boards[i].BoardData[j].EntryValue.ToString());
+                        }
+                        
                         EditorGUILayout.EndHorizontal();
                     }
 

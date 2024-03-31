@@ -39,6 +39,7 @@ namespace CarterGames.Assets.LeaderboardManager
         ───────────────────────────────────────────────────────────────────────────────────────────────────────────── */
         
         [SerializeField] private string boardID;
+        [SerializeField] private LeaderboardType type;
         [SerializeField] private List<LeaderboardEntry> boardData;
         
         /* ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -52,6 +53,16 @@ namespace CarterGames.Assets.LeaderboardManager
         {
             get => boardID;
             set => boardID = value;
+        }
+        
+        
+        /// <summary>
+        /// The type the leaderboard is for.
+        /// </summary>
+        public LeaderboardType Type
+        {
+            get => type;
+            set => type = value;
         }
 
         
@@ -69,20 +80,14 @@ namespace CarterGames.Assets.LeaderboardManager
         ───────────────────────────────────────────────────────────────────────────────────────────────────────────── */
         
         /// <summary>
-        /// Blank constructor which just makes a new data list when used...
+        /// Makes a new leaderboard based on the entered data.
         /// </summary>
-        public Leaderboard()
-        {
-            boardData = new List<LeaderboardEntry>();
-        }
-        
-
-        /// <summary>
-        /// Blank constructor which just makes a new data list when used...
-        /// </summary>
-        public Leaderboard(string id)
+        /// <param name="id">The id to assign.</param>
+        /// <param name="type">The type of leaderboard to make.</param>
+        public Leaderboard(string id, LeaderboardType type)
         {
             boardID = id;
+            this.type = type;
             boardData = new List<LeaderboardEntry>();
         }
 

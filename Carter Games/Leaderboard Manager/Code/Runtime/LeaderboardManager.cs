@@ -123,11 +123,12 @@ namespace CarterGames.Assets.LeaderboardManager
         /// Creates a new leaderboard with the id entered...
         /// </summary>
         /// <param name="boardId">The id the board should be defined as</param>
-        public static void CreateLeaderboard(string boardId)
+        /// <param name="boardType">The type of board to make.</param>
+        public static void CreateLeaderboard(string boardId, LeaderboardType boardType)
         {
             if (data.Leaderboards.Count <= 0)
             {
-                var firstBoard = new Leaderboard(boardId);
+                var firstBoard = new Leaderboard(boardId, boardType);
             
                 data.Leaderboards.Add(firstBoard.Id, firstBoard);
                 
@@ -137,11 +138,11 @@ namespace CarterGames.Assets.LeaderboardManager
             
             if (BoardExists(boardId))
             {
-                LbmLogs.Normal($"[Leaderboard Manager] Unable to create leaderboard with the ID {boardId} as a board of this ID already exists.");
+                LbmLogger.Normal($"[Leaderboard Manager] Unable to create leaderboard with the ID {boardId} as a board of this ID already exists.");
                 return;
             }
 
-            var newBoard = new Leaderboard(boardId);
+            var newBoard = new Leaderboard(boardId, boardType);
             
             data.Leaderboards.Add(newBoard.Id, newBoard);
             
@@ -153,15 +154,16 @@ namespace CarterGames.Assets.LeaderboardManager
         /// Gets the leaderboard of the entered id or creates it if it doesn't exist.
         /// </summary>
         /// <param name="boardId">The id the board should be defined as or gotten</param>
+        /// <param name="boardType">The type of board to make.</param>
         /// <returns>The board either found or just created.</returns>
-        public static Leaderboard CreateOrGetLeaderboard(string boardId)
+        public static Leaderboard CreateOrGetLeaderboard(string boardId, LeaderboardType boardType)
         {
             if (BoardExists(boardId))
             {
                 return GetLeaderboard(boardId);
             }
 
-            CreateLeaderboard(boardId);
+            CreateLeaderboard(boardId, boardType);
             return GetLeaderboard(boardId);
         }
 
@@ -176,7 +178,7 @@ namespace CarterGames.Assets.LeaderboardManager
 
             if (!BoardExists(boardId))
             {
-                LbmLogs.Normal($"[Leaderboard Manager] Unable to delete leaderboard with the ID {boardId} as there are no board with this ID saved.");
+                LbmLogger.Normal($"[Leaderboard Manager] Unable to delete leaderboard with the ID {boardId} as there are no board with this ID saved.");
                 return;
             }
             
@@ -194,7 +196,7 @@ namespace CarterGames.Assets.LeaderboardManager
         {
             if (!BoardExists(boardId))
             {
-                LbmLogs.Normal($"[Leaderboard Manager] Unable to clear leaderboard with the ID {boardId} as there are no board with this ID saved.");
+                LbmLogger.Normal($"[Leaderboard Manager] Unable to clear leaderboard with the ID {boardId} as there are no board with this ID saved.");
                 return;
             }
             
@@ -253,7 +255,7 @@ namespace CarterGames.Assets.LeaderboardManager
                 return data.Leaderboards[boardId];
             }
     
-            LbmLogs.Normal($"[Leaderboard Manager] Unable to find leaderboard with the ID {boardId} as a board of this ID doesn't exists.");
+            LbmLogger.Normal($"[Leaderboard Manager] Unable to find leaderboard with the ID {boardId} as a board of this ID doesn't exists.");
             return null;
         }
         
@@ -263,11 +265,11 @@ namespace CarterGames.Assets.LeaderboardManager
         /// </summary>
         /// <param name="boardId">The board to add to</param>
         /// <param name="entry">the data to add</param>
-        public static void AddEntryToBoard(string boardId, LeaderboardEntry entry)
+        public static void AddEntryToBoard(string boardId, LeaderboardType type, LeaderboardEntry entry)
         {
             if (!BoardExists(boardId))
             {
-                CreateLeaderboard(boardId);
+                CreateLeaderboard(boardId, type);
                 GetLeaderboard(boardId).AddEntry(entry);
                 Save();
                 return;

@@ -49,14 +49,7 @@ namespace CarterGames.Assets.LeaderboardManager.Save
         public LeaderboardSaveData(Leaderboard leaderboard)
         {
             id = leaderboard.Id;
-
-            type = leaderboard.GetType().FullName switch
-            {
-                var x when x.Contains("Score") => LeaderboardType.Score,
-                var x when x.Contains("Time") => LeaderboardType.Time,
-                _ => type
-            };
-
+            type = leaderboard.Type;
             entriesJson = new List<string>();
             
             foreach (var v in leaderboard.BoardData)
@@ -75,7 +68,7 @@ namespace CarterGames.Assets.LeaderboardManager.Save
         /// <returns>A leaderboard from the save dat in this class instance.</returns>
         public Leaderboard ToLeaderboard()
         {
-            var board = new Leaderboard(id);
+            var board = new Leaderboard(id, type);
             board.BoardData = new List<LeaderboardEntry>();
 
             foreach (var entry in entriesJson)

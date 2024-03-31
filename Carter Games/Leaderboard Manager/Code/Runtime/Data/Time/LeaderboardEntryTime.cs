@@ -126,34 +126,34 @@ namespace CarterGames.Assets.LeaderboardManager
         /// <returns>The formatted string.</returns>
         public string ValueFormatted(DisplayTimeFormat format)
         {
+            Debug.Log(EntryValueAsTime.TotalSeconds);
+            
             switch (format)
             {
                 case DisplayTimeFormat.SecondsOnly:
-                    return TimeSpan.FromSeconds(EntryValueAsTime.Seconds).ToString("ss");
+                    return EntryValueAsTime.TotalSeconds.ToString(CultureInfo.InvariantCulture);
                 case DisplayTimeFormat.MinutesOnly:
-                    return TimeSpan.FromSeconds(EntryValueAsTime.Seconds).ToString("mm");
+                    return EntryValueAsTime.TotalMinutes.ToString(CultureInfo.InvariantCulture);
                 case DisplayTimeFormat.MinutesSeconds:
-                    return TimeSpan.FromSeconds(EntryValueAsTime.Seconds).ToString("mm':'ss");
+                    return EntryValueAsTime.ToString($"{EntryValueAsTime.TotalMinutes}':'ss");
                 case DisplayTimeFormat.HoursOnly:
-                    return TimeSpan.FromSeconds(EntryValueAsTime.Seconds).ToString("hh");
+                    return EntryValueAsTime.TotalHours.ToString(CultureInfo.InvariantCulture);
                 case DisplayTimeFormat.HoursMinutes:
-                    return TimeSpan.FromSeconds(EntryValueAsTime.Seconds).ToString("hh':'mm");
+                    return EntryValueAsTime.ToString($"{EntryValueAsTime.TotalHours}':'mm");
                 case DisplayTimeFormat.HoursMinutesSeconds:
-                    return TimeSpan.FromSeconds(EntryValueAsTime.Seconds).ToString("hh':'mm':'ss");
+                    return EntryValueAsTime.ToString($"{EntryValueAsTime.TotalHours}':'mm':'ss");
                 case DisplayTimeFormat.MillisecondsOnly:
-                    return TimeSpan.FromMilliseconds(EntryValueAsTime.Seconds).ToString("fff");
+                    return EntryValueAsTime.TotalMilliSeconds.ToString(CultureInfo.InvariantCulture);
                 case DisplayTimeFormat.SecondsMilliseconds:
-                    return TimeSpan.FromMilliseconds(EntryValueAsTime.Seconds).ToString("ss':'fff");
+                    return EntryValueAsTime.ToString($"{EntryValueAsTime.TotalSeconds}'.'fff");
                 case DisplayTimeFormat.MinutesSecondsMilliseconds:
-                    return TimeSpan.FromMilliseconds(EntryValueAsTime.Seconds)
-                        .ToString("mm':'ss':'fff");
+                    return EntryValueAsTime.ToString($"{EntryValueAsTime.TotalMinutes}':'ss'.'fff");
                 case DisplayTimeFormat.HoursMinutesSecondsMilliseconds:
-                    return TimeSpan.FromMilliseconds(EntryValueAsTime.Seconds)
-                        .ToString("hh':'mm':'ss':'fff");
+                    return EntryValueAsTime.ToString($"{EntryValueAsTime.TotalHours}':'mm':'ss'.'fff");
                 case DisplayTimeFormat.Unassigned:
                 default:
-                    LbmLogs.Normal("[LeaderboardEntryTime] No valid time format selected.");
-                    return (EntryValueAsTime.Seconds.ToString(CultureInfo.InvariantCulture));
+                    LbmLogger.Normal("[LeaderboardEntryTime] No valid time format selected.");
+                    return EntryValueAsTime.ToString($"{EntryValueAsTime.TotalHours}':'mm':'ss");
             }
         }
     }
