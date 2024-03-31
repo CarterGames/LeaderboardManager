@@ -22,6 +22,7 @@
 */
 
 using System;
+using System.Globalization;
 using UnityEngine;
 
 namespace CarterGames.Assets.LeaderboardManager.Serialization
@@ -35,6 +36,12 @@ namespace CarterGames.Assets.LeaderboardManager.Serialization
         /* ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
         |   Fields
         ───────────────────────────────────────────────────────────────────────────────────────────────────────────── */ 
+        
+        public const long TicksPerMillisecond = 10000;
+        public const long TicksPerSecond = 10000000;
+        public const long TicksPerMinute = 600000000;
+        public const long TicksPerHour = 36000000000;
+        public const long TicksPerDay = 864000000000;
         
         [SerializeField] private int days;
         [SerializeField] private int hours;
@@ -81,37 +88,37 @@ namespace CarterGames.Assets.LeaderboardManager.Serialization
         /// <summary>
         /// The ticks stored in the time value.
         /// </summary>
-        public long Ticks => ticks;
+        public long Ticks => GetTicks();
 
         
         /// <summary>
         /// The total number of days stored.
         /// </summary>
-        public double TotalDays => TimeSpan.FromTicks(ticks).TotalDays;
+        public double TotalDays => Math.Floor(TimeSpan.FromTicks(Ticks).TotalDays);
         
         
         /// <summary>
         /// The total number of hours stored.
         /// </summary>
-        public double TotalHours => TimeSpan.FromTicks(ticks).TotalHours;
+        public double TotalHours => Math.Floor(TimeSpan.FromTicks(Ticks).TotalHours);
         
         
         /// <summary>
         /// The total number of minutes stored.
         /// </summary>
-        public double TotalMinutes => TimeSpan.FromTicks(ticks).TotalMinutes;
+        public double TotalMinutes => Math.Floor(TimeSpan.FromTicks(Ticks).TotalMinutes);
         
         
         /// <summary>
         /// The total number of seconds stored.
         /// </summary>
-        public double TotalSeconds => TimeSpan.FromTicks(ticks).TotalSeconds;
+        public double TotalSeconds => Math.Floor(TimeSpan.FromTicks(Ticks).TotalSeconds);
         
         
         /// <summary>
         /// The total number of milliseconds stored.
         /// </summary>
-        public double TotalMilliSeconds => TimeSpan.FromTicks(ticks).TotalMilliseconds;
+        public double TotalMilliSeconds => TimeSpan.FromTicks(Ticks).TotalMilliseconds;
 
         /* ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
         |   Operators
@@ -223,6 +230,75 @@ namespace CarterGames.Assets.LeaderboardManager.Serialization
             };
 
             return time;
+        }
+
+
+        /// <summary>
+        /// Gets the ticks based on the time data stored.
+        /// </summary>
+        /// <returns>The ticks for this data.</returns>
+        private long GetTicks()
+        {
+            if (ticks > 0) return ticks;
+
+            if (milliseconds > 0)
+            {
+                ticks += milliseconds * TicksPerMillisecond;
+            }
+            
+            if (seconds > 0)
+            {
+                ticks += seconds * TicksPerSecond;
+            }
+            
+            if (minutes > 0)
+            {
+                ticks += minutes * TicksPerMinute;
+            }
+            
+            if (hours > 0)
+            {
+                ticks += hours * TicksPerHour;
+            }
+            
+            if (days > 0)
+            {
+                ticks += days * TicksPerDay;
+            }
+
+            return ticks;
+        }
+
+
+        public override string ToString()
+        {
+            var date = new DateTime();
+            date = date.AddTicks(Ticks);
+            return date.ToString(CultureInfo.InvariantCulture);
+        }
+
+        
+        public string ToString(string format)
+        {
+            var date = new DateTime();
+            date = date.AddTicks(Ticks);
+            return date.ToString(format, CultureInfo.InvariantCulture);
+        }
+
+        
+        public string ToString(IFormatProvider provider)
+        {
+            var date = new DateTime();
+            date = date.AddTicks(Ticks);
+            return date.ToString(provider);
+        }
+        
+        
+        public string ToString(string format, IFormatProvider provider)
+        {
+            var date = new DateTime();
+            date = date.AddTicks(Ticks);
+            return date.ToString(format, provider);
         }
     }
 }

@@ -102,7 +102,7 @@ namespace CarterGames.Assets.LeaderboardManager.Patches
 
             if (LeaderboardManager.BoardExists(legacyBoardDataClass.BoardID)) return;
             
-            LeaderboardManager.CreateLeaderboard(legacyBoardDataClass.BoardID);
+            LeaderboardManager.CreateLeaderboard(legacyBoardDataClass.BoardID, LeaderboardType.Score);
 
             foreach (var entry in legacyBoardDataClass.BoardData)
             {

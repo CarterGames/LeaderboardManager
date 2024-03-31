@@ -21,6 +21,8 @@
  * THE SOFTWARE.
  */
 
+using System;
+using CarterGames.Assets.LeaderboardManager.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,6 +38,7 @@ namespace CarterGames.Assets.LeaderboardManager.Demo
         ───────────────────────────────────────────────────────────────────────────────────────────────────────────── */
         
         [SerializeField] private InputField boardId;
+        [SerializeField] private LeaderboardType type;
         [SerializeField] private InputField playerName;
         [SerializeField] private InputField playerScore;
 
@@ -50,11 +53,11 @@ namespace CarterGames.Assets.LeaderboardManager.Demo
         {
             if (string.IsNullOrEmpty(playerName.text) || string.IsNullOrEmpty(playerScore.text))
             {
-                LbmLogs.Normal("[DEMO]: Either the name or score fields were blank, please ensure the fields are filled before using this option.");
+                LbmLogger.Normal("[DEMO]: Either the name or score fields were blank, please ensure the fields are filled before using this option.");
                 return;
             }
             
-            LeaderboardManager.AddEntryToBoard(boardId.text, new LeaderboardEntryScore(playerName.text, double.Parse(playerScore.text)));
+            LeaderboardManager.AddEntryToBoard(boardId.text, type, new LeaderboardEntryTime(playerName.text, SerializableTime.FromSeconds(double.Parse(playerScore.text))));
             playerName.text = string.Empty;
             playerScore.text = string.Empty;
         }
@@ -67,7 +70,7 @@ namespace CarterGames.Assets.LeaderboardManager.Demo
         {
             if (string.IsNullOrEmpty(playerName.text) || string.IsNullOrEmpty(playerScore.text))
             {
-                LbmLogs.Normal("[DEMO]: Either the name or score fields were blank, please ensure the fields are filled before using this option.");
+                LbmLogger.Normal("[DEMO]: Either the name or score fields were blank, please ensure the fields are filled before using this option.");
                 return;
             }
                 

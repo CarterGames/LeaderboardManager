@@ -28,7 +28,7 @@ namespace CarterGames.Assets.LeaderboardManager
     /// <summary>
     /// A logging class for messages within the asset.
     /// </summary>
-    public static class LbmLogs
+    public static class LbmLogger
     {
         /* ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
         |   Constants

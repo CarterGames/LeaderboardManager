@@ -388,7 +388,7 @@ namespace CarterGames.Assets.LeaderboardManager.Editor
         private static void ConvertAndSave(LegacyBoardDataClass legacyBoardDataClass, LeaderboardType convertTo)
         {
             LeaderboardManager.Load();
-            LeaderboardManager.CreateLeaderboard(legacyBoardDataClass.BoardID);
+            LeaderboardManager.CreateLeaderboard(legacyBoardDataClass.BoardID, convertTo);
 
             foreach (var entry in legacyBoardDataClass.BoardData)
             {

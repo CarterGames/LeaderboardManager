@@ -1790,6 +1790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardId: {fileID: 1511537943}
+  type: 0
   playerName: {fileID: 505065358}
   playerScore: {fileID: 251582821}
 --- !u!4 &825885281
@@ -1913,12 +1914,12 @@ MonoBehaviour:
   boardId: Example
   displayOption: 1
   boardParent: {fileID: 1833917230}
-  rowPrefab: {fileID: 1667449005708359939, guid: 083a44121b2ae0c40b963257e3514593, type: 3}
-  entriesToShow: 5
+  rowPrefab: {fileID: 7602520312045681682, guid: f39d1e8b6224cde4d906c3065b2d4be6, type: 3}
+  entriesToShow: 10
   showOptions: 0
   customisations:
     startAt: 1
-    showPosition: 1
+    showPosition: 0
     positionPrefix: '#'
     timeFormat: 0
 --- !u!4 &904782689
@@ -1929,7 +1930,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904782687}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 478.09885, y: 278.1841, z: -4.62691}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

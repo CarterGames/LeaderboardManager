@@ -91,7 +91,7 @@ namespace CarterGames.Assets.LeaderboardManager
         {
             if (customisations.StartingAt < 1)
             {
-                LbmLogs.Error("[LeaderboardDisplay] Start at index must be greater than or equal to 1.");
+                LbmLogger.Error("[LeaderboardDisplay] Start at index must be greater than or equal to 1.");
                 return;
             }
             
@@ -100,7 +100,7 @@ namespace CarterGames.Assets.LeaderboardManager
             switch (DisplayOption)
             {
                 case DisplayOption.Unassigned:
-                    LbmLogs.Warning("[LeaderboardDisplay] Display option cannot be Unassigned");
+                    LbmLogger.Warning("[LeaderboardDisplay] Display option cannot be Unassigned");
                     break;
                 case DisplayOption.Top3Ascending:
                 case DisplayOption.Top3Descending:
@@ -163,7 +163,7 @@ namespace CarterGames.Assets.LeaderboardManager
                 switch (DisplayOption)
                 {
                     case DisplayOption.Unassigned:
-                        LbmLogs.Warning("[LeaderboardDisplay] Display option cannot be Unassigned.");
+                        LbmLogger.Warning("[LeaderboardDisplay] Display option cannot be Unassigned.");
                         break;
                     case DisplayOption.AsWritten:
                         entries = Base.BoardData.ToArray();
