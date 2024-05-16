@@ -36,11 +36,41 @@ namespace CarterGames.Assets.LeaderboardManager.Demo
         /* ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
         |   Fields
         ───────────────────────────────────────────────────────────────────────────────────────────────────────────── */
+
+        private const string ExampleBoardId = "Example";
+        private const string ExampleBoardTimeId = "Example_Time";
         
-        [SerializeField] private InputField boardId;
         [SerializeField] private LeaderboardType type;
+        [Space]
         [SerializeField] private InputField playerName;
         [SerializeField] private InputField playerScore;
+        [Space] 
+        [SerializeField] private LeaderboardDisplay scoreDisplayController;
+        [SerializeField] private LeaderboardDisplay timeDisplayController;
+        [Space] 
+        [SerializeField] private Button scoreTypeToggle;
+        [SerializeField] private Button timeTypeToggle;
+        [Space] 
+        [SerializeField] private Color enabledCol;
+        [SerializeField] private Color disabledCol;
+        
+        /* ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
+        |   Properties
+        ───────────────────────────────────────────────────────────────────────────────────────────────────────────── */
+
+        private string BoardId => type == LeaderboardType.Score ? ExampleBoardId : ExampleBoardTimeId;
+        
+        /* ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
+        |   Unity Methods
+        ───────────────────────────────────────────────────────────────────────────────────────────────────────────── */
+
+        private void OnEnable()
+        {
+            scoreTypeToggle.targetGraphic.color = type == LeaderboardType.Score ? enabledCol : disabledCol;
+            timeTypeToggle.targetGraphic.color = type == LeaderboardType.Time ? enabledCol : disabledCol;
+
+            UpdateDisplay();
+        }
 
         /* ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
         |   Methods
@@ -56,10 +86,16 @@ namespace CarterGames.Assets.LeaderboardManager.Demo
                 LbmLogger.Normal("[DEMO]: Either the name or score fields were blank, please ensure the fields are filled before using this option.");
                 return;
             }
+
+            var entry = type == LeaderboardType.Score
+                ? (LeaderboardEntry) new LeaderboardEntryScore(playerName.text, double.Parse(playerScore.text))
+                : (LeaderboardEntry) new LeaderboardEntryTime(playerName.text, SerializableTime.FromSeconds(double.Parse(playerScore.text)));
             
-            LeaderboardManager.AddEntryToBoard(boardId.text, type, new LeaderboardEntryTime(playerName.text, SerializableTime.FromSeconds(double.Parse(playerScore.text))));
+            LeaderboardManager.AddEntryToBoard(BoardId, type, entry);
             playerName.text = string.Empty;
             playerScore.text = string.Empty;
+
+            UpdateDisplay();
         }
         
         
@@ -74,9 +110,11 @@ namespace CarterGames.Assets.LeaderboardManager.Demo
                 return;
             }
                 
-            LeaderboardManager.DeleteEntryFromBoard(boardId.text, playerName.text, double.Parse(playerScore.text));
+            LeaderboardManager.DeleteEntryFromBoard(BoardId, playerName.text, double.Parse(playerScore.text));
             playerName.text = string.Empty;
             playerScore.text = string.Empty;
+
+            UpdateDisplay();
         }
 
         
@@ -85,7 +123,41 @@ namespace CarterGames.Assets.LeaderboardManager.Demo
         /// </summary>
         public void ClearBoard()
         {
-            LeaderboardManager.ClearLeaderboard(boardId.text);
+            LeaderboardManager.ClearLeaderboard(BoardId);
+            UpdateDisplay();
+        }
+
+
+        /// <summary>
+        /// Called by example scene buttons to update the current display when called.
+        /// </summary>
+        public void UpdateDisplay()
+        {
+            switch (type)
+            {
+                case LeaderboardType.Score:
+                    timeDisplayController.ClearDisplay();
+                    scoreDisplayController.UpdateDisplay();
+                    break;
+                case LeaderboardType.Time:
+                    scoreDisplayController.ClearDisplay();
+                    timeDisplayController.UpdateDisplay();
+                    break;
+            }
+        }
+
+
+        /// <summary>
+        /// Switches the active type when called.
+        /// </summary>
+        public void SwitchType()
+        {
+            type = type == LeaderboardType.Score ? LeaderboardType.Time : LeaderboardType.Score;
+            
+            scoreTypeToggle.targetGraphic.color = type == LeaderboardType.Score ? enabledCol : disabledCol;
+            timeTypeToggle.targetGraphic.color = type == LeaderboardType.Time ? enabledCol : disabledCol;
+            
+            UpdateDisplay();
         }
     }
 }
