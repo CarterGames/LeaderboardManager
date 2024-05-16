@@ -126,8 +126,6 @@ namespace CarterGames.Assets.LeaderboardManager
         /// <returns>The formatted string.</returns>
         public string ValueFormatted(DisplayTimeFormat format)
         {
-            Debug.Log(EntryValueAsTime.TotalSeconds);
-            
             switch (format)
             {
                 case DisplayTimeFormat.SecondsOnly:

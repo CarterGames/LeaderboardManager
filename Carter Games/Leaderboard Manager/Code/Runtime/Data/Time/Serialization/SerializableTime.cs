@@ -31,7 +31,7 @@ namespace CarterGames.Assets.LeaderboardManager.Serialization
     /// Stored a time value in a readable format.
     /// </summary>
     [Serializable]
-    public struct SerializableTime
+    public struct SerializableTime : IComparable
     {
         /* ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
         |   Fields
@@ -277,7 +277,7 @@ namespace CarterGames.Assets.LeaderboardManager.Serialization
             return date.ToString(CultureInfo.InvariantCulture);
         }
 
-        
+
         public string ToString(string format)
         {
             var date = new DateTime();
@@ -299,6 +299,15 @@ namespace CarterGames.Assets.LeaderboardManager.Serialization
             var date = new DateTime();
             date = date.AddTicks(Ticks);
             return date.ToString(format, provider);
+        }
+        
+        
+        public int CompareTo(object obj)
+        {
+            if (obj == null) return 1;
+            
+            if (Ticks > ((SerializableTime) obj).Ticks) return 1;
+            return Ticks < ((SerializableTime) obj).Ticks ? -1 : 0;
         }
     }
 }
