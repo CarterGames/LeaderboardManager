@@ -23,6 +23,9 @@
 
 using System;
 using System.IO;
+#if UNITY_WEBGL && !UNITY_EDITOR
+using UnityEngine;
+#endif
 
 namespace CarterGames.Assets.LeaderboardManager.Save
 {
@@ -89,7 +92,6 @@ namespace CarterGames.Assets.LeaderboardManager.Save
 #pragma warning restore
                 // Nothing
             }
-
 
 #if UNITY_WEBGL && !UNITY_EDITOR
             Application.ExternalEval("_JS_FileSystem_Sync();");
