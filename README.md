@@ -1,3 +1,5 @@
+🟨 This asset is depreciated. It can still be downloaded and used, however, I'm no longer providing updates for this asset. 🟨
+
 ![LBM](https://github.com/CarterGames/LeaderboardManager/assets/33253710/d5ee73b1-951f-48e8-ab58-e6344792ef40)
 
 
